@@ -18,7 +18,6 @@ func FindRes()([]*models.Res,error){
 		fmt.Println(err.Error())
 		return nil,err
 	}else{
-		//build the array of products
 		var rest[]*models.Res
 		for result.Next(ctx){
 			post:=&models.Res{}
@@ -31,9 +30,6 @@ func FindRes()([]*models.Res,error){
 		}
 		if err:=result.Err();err!=nil{
 			return nil,err
-		}
-		if len(rest)==0{
-			return []*models.Res{},nil
 		}
 		return rest,nil
 	}
