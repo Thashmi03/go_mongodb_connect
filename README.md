@@ -28,8 +28,8 @@ steps for employeeCollection
 **********************************
 1. create a common method that takes two parameters 
 
- first-database name
- 
- second- collection name
+    first-database name
+
+    second- collection name
 
  this method will return mmongo collection
