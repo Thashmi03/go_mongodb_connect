@@ -35,7 +35,7 @@ import (
 // **********************************
 func ProductContext()*mongo.Collection{
 	client,_:=config.ConnectDatabase()
-	return config.GetCollection(client,"inventory","product")
+	return config.GetCollection(client,"sample_restaurants","restaurants")
 
 }
 func InsertProduct(product models.Product){
@@ -61,7 +61,7 @@ func InsertProductList(products []interface{}){
 //finding products
 func FindProducts()([]*models.Product,error){
 	ctx,_:=context.WithTimeout(context.Background(),10*time.Second)
-	filter:=bson.D{{"price",11000}}
+	filter:=bson.D{}
 	result,err := ProductContext().Find(ctx,filter)
 	if err!=nil{
 		fmt.Println(err.Error())

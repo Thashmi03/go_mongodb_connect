@@ -2,9 +2,10 @@ package main
 
 import (
 	"fmt"
+	"mongodb-dal/services"
 	// "mongodb-dal/config"
 	// "mongodb-dal/models"
-	"mongodb-dal/services"
+	// "mongodb-dal/services"
 
 	// "go.mongodb.org/mongo-driver/bson/primitive"
 	"go.mongodb.org/mongo-driver/mongo"
@@ -38,9 +39,10 @@ func main(){
 	// services.FindProducts()
 
 
-	pro,_:=services.FindProducts()
-	for _,p:=range pro{
-		fmt.Println(p.Name,p.Description)
+	pro,_:=services.FindRes()
+	for i,p:=range pro{
+		fmt.Println(i+1,p.Name,"-",p.Cuisine)
 	}
+	
 	
 }
