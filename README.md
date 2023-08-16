@@ -1,6 +1,6 @@
 # go_mongodb_connect
 
-Steps:
+# Steps:
 ************
 
 1. Install mongo db driver
@@ -18,13 +18,13 @@ Steps:
 7. Convert the result set into golang structures
 
 
-To connect to database
+# To connect to database
 ***********************
 1. we need to have the name of the database 
 
 2. we need to have the collection name
 
-steps for employeeCollection 
+# steps for employeeCollection 
 **********************************
 1. create a common method that takes two parameters 
 
