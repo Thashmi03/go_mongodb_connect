@@ -1,28 +1,36 @@
 package main
 
 import (
-	"context"
 	"fmt"
-	"mongodb-dal/constants"
+	// "mongodb-dal/config"
+	"mongodb-dal/models"
+	"mongodb-dal/services"
 
+	"go.mongodb.org/mongo-driver/bson/primitive"
 	"go.mongodb.org/mongo-driver/mongo"
-	"go.mongodb.org/mongo-driver/mongo/options"
-	"go.mongodb.org/mongo-driver/mongo/readpref"
 )
 
-func main(){
-	ctx:=context.TODO()
-	//connect to mongodb
-	mongoconn:=options.Client().ApplyURI(constants.ConnectionString)
-	mongoclient,err:=mongo.Connect(ctx,mongoconn)
-	if err!=nil{
-		panic(err)
-	}
-	//readpref.Primary() asks whether it connects to first replica in cloud
-	
-	if err:=mongoclient.Ping(ctx,readpref.Primary());err!=nil{
-		panic(err)
-	}
-	fmt.Println("MongoDB successfully connected...")
+// "context"
+// "fmt"
+// "mongodb-dal/constants"
 
+// "go.mongodb.org/mongo-driver/mongo"
+// "go.mongodb.org/mongo-driver/mongo/options"
+// "go.mongodb.org/mongo-driver/mongo/readpref"
+var(
+	mongoclient *mongo.Client
+)
+func main(){
+	// client,_:=config.ConnectDatabase()
+	// config.GetCollection(client,"sample training")
+	
+	fmt.Println("MongoDB successfully connected...")
+	// inserting one product
+	// product:=models.Product{ID: primitive.NewObjectID(),Name: "OnePlus",Price: 14000,Description: "Good"}
+	
+	// inserting multiple products
+	product:=[]interface{}{models.Product{ID: primitive.NewObjectID(),Name: "OnePlus",Price: 14000,Description: "Good"},
+		models.Product{ID: primitive.NewObjectID(),Name: "Nokia",Price: 11000,Description: "Good"}}
+	services.InsertProductList(product)
+	
 }
