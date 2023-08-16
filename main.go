@@ -41,7 +41,7 @@ func main(){
 
 	pro,_:=services.FindRes()
 	for i,p:=range pro{
-		fmt.Println(i+1,p.Name,"-",p.Cuisine)
+		fmt.Println(i+1,"Name:",p.Name,"-Cuisine",p.Cuisine)
 	}
 	
 	
