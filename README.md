@@ -47,4 +47,4 @@ eg:db.getCollection("students").aggregate([{$unwind:"$course"}])
 3. $match-will be acting as the search query that can be intergrated with aggregation pipeline. 
 
 4. $sort,$skip-we can use in aggregation pipeline
-5. $lookup-will be used to perform the joint between two tables 
+5. $lookup-will be used to perform the joint between two tables
