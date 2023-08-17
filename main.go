@@ -34,10 +34,12 @@ func main(){
 
 
 	fmt.Println("MongoDB successfully connected...")
-	pro,_:=services.FindTransactions()
-	for _,p:=range pro{
-		fmt.Println(p )
-	}
+	// pro,_:=services.FindTransactions()
+	// for _,p:=range pro{
+	// 	// fmt.Printf("{\nid:%v,\naccount_id:%v,\ntransaction_count:%v,\nbucket_start_date:%v,\nbucket_end_date:%v\n}\n",p.ID,p.AccountId,p.Trans_count,p.Bucket_start,p.Bucket_end)
+	// 	fmt.Println(p)
+	// }
+	services.FetchAggregatedTransactions()
 	
 	
 }

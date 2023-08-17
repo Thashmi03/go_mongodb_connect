@@ -9,7 +9,7 @@ type Transaction struct{
 	Trans_count 	int `json:"trans_count" bson:"transaction_count"`
 	Bucket_start 	primitive.DateTime `json:"bucket_start_date" bson:"bucket_start_date"`
 	Bucket_end 		primitive.DateTime`json:"bucket_end_date" bson:"bucket_end_date"`
-	Trans 			[] Inner_Transaction `json:"transactions" bson:"transactions"`
+	// Trans 			[] Inner_Transaction `json:"transactions" bson:"transactions"`
 }
 type Inner_Transaction struct{
 	Date 			primitive.DateTime `json:"date" bson:"date"`
