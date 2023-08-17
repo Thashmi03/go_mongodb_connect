@@ -19,13 +19,15 @@
 
 
 ## To connect to database
-***********************
+******************************
 1. we need to have the name of the database 
 
 2. we need to have the collection name
 
-## steps for employeeCollection 
+# Mongo connections to do
 **********************************
+## steps for employeeCollection 
+
 1. create a common method that takes two parameters 
 
     first-database name
@@ -33,3 +35,15 @@
     second- collection name
 
   this method will return mmongo collection
+
+
+## operators
+
+1. $unwind-used to split the array documents or array fields into separate documents for each limit in the array.
+eg:db.getCollection("students").aggregate([{$unwind:"$course"}])
+
+2. $pipeline - when we are performing the aggreegation pipeline will give you the different stages to perform the aggregation.
+
+3. $match-will be acting as the search query that can be intergrated with aggregation pipeline. 
+
+4. $sort,$skip-we can use in aggregation pipeline
