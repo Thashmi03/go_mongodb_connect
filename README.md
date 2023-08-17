@@ -48,3 +48,11 @@ eg:db.getCollection("students").aggregate([{$unwind:"$course"}])
 
 4. $sort,$skip-we can use in aggregation pipeline
 5. $lookup-will be used to perform the joint between two tables
+eg-db.Books.aggregate([{
+    $lookup:{
+        from:"Authors",
+        localField:"author_id",
+        foreignField:"_id",
+        as:"AuthorDetail"
+    }
+}])
