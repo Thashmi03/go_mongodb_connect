@@ -19,12 +19,13 @@ func TransactionContext() *mongo.Collection {
 }
 func FindTransactions() ([]*models.Transaction, error) {
 	// this is used for deleteing after the given time
-	ctx, _ := context.WithTimeout(context.Background(), 100*time.Second)
+	ctx,cancel := context.WithTimeout(context.Background(), 100*time.Second)
+	defer cancel()
 	//it gets the data from database
 	// bson.mfor greater than check
-	filter := bson.M{"account_id":bson.D{{"$gt",7000}}}
+	filter := bson.M{"account_id":bson.D{{Key: "$gt",Value: 7000}}}
 	// result stores the data of 10 restaurant
-	options := options.Find().SetSort(bson.D{{"transaction_count", 1}}).SetSkip(30).SetLimit(10)
+	options := options.Find().SetSort(bson.D{{Key: "transaction_count", Value: 1}}).SetSkip(30).SetLimit(10)
 	result, err := TransactionContext().Find(ctx, filter, options)
 	// error checking
 	if err != nil {
@@ -52,15 +53,14 @@ func FindTransactions() ([]*models.Transaction, error) {
 }
 
 
-
-
 func FetchAggregatedTransactions(){
-	ctx,_:=context.WithTimeout(context.Background(),100*time.Second)
-	matchStage:=bson.D{{"$match",bson.D{{"account_id",278866}}}}
+	ctx,cancel:=context.WithTimeout(context.Background(),100*time.Second)
+	defer cancel()
+	matchStage:=bson.D{{Key: "$match",Value: bson.D{{Key: "account_id",Value: 278866}}}}
 	groupStage:=bson.D{
-		{"$group",bson.D{
-				{"_id","$account_id"},
-				{"total_count",bson.D{{"$sum","$transaction_count"}}},
+		{Key: "$group",Value: bson.D{
+				{Key: "_id",Value: "$account_id"},
+				{Key: "total_count",Value: bson.D{{Key: "$sum",Value: "$transaction_count"}}},
 			}}}
 	result,err:=TransactionContext().Aggregate(ctx,mongo.Pipeline{matchStage,groupStage})
 	if err!=nil{
@@ -79,4 +79,17 @@ func FetchAggregatedTransactions(){
 		
 	}
 
+}
+
+func UpdateTransaction(intialValue int,newValue int)(*mongo.UpdateResult,error){
+	ctx,cancel:=context.WithTimeout(context.Background(),100*time.Second)
+	defer cancel()
+	filter:=bson.D{{Key: "account_id",Value: intialValue}}
+	update:=bson.D{{Key: "$set",Value: bson.D{{Key: "account_id",Value: newValue}}}}
+	result,err:=TransactionContext().UpdateOne(ctx,filter,update)
+	if err!=nil{
+		fmt.Println(err.Error())
+		return nil,err
+	}
+	return result,nil
 }

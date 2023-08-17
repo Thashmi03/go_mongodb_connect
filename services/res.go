@@ -20,7 +20,8 @@ func ProductCont()*mongo.Collection{
 
 func FindRes() ([]*models.Res, error) {
 	// this is used for deleteing after the given time
-	ctx, _ := context.WithTimeout(context.Background(), 10*time.Second)
+	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
+	defer cancel()
 	//it gets the data from database
 	filter := bson.D{}
 	// result stores the data of 10 restaurant

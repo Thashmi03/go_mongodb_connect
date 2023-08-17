@@ -39,7 +39,8 @@ func ProductContext()*mongo.Collection{
 
 }
 func InsertProduct(product models.Product){
-	ctx,_:=context.WithTimeout(context.Background(),10*time.Second)
+	ctx,cancel:=context.WithTimeout(context.Background(),10*time.Second)
+	defer cancel()
 	result,err:=ProductContext().InsertOne(ctx,product)
 	if err!=nil{
 		fmt.Println(err)
@@ -49,7 +50,8 @@ func InsertProduct(product models.Product){
 }
 
 func InsertProductList(products []interface{}){
-	ctx,_:=context.WithTimeout(context.Background(),10*time.Second)
+	ctx,cancel:=context.WithTimeout(context.Background(),10*time.Second)
+	defer cancel()
 	result,err:=ProductContext().InsertMany(ctx,products)
 	if err!=nil{
 		fmt.Println(err)
@@ -60,7 +62,8 @@ func InsertProductList(products []interface{}){
 
 //finding products
 func FindProducts()([]*models.Product,error){
-	ctx,_:=context.WithTimeout(context.Background(),10*time.Second)
+	ctx,cancel:=context.WithTimeout(context.Background(),10*time.Second)
+	defer cancel()
 	filter:=bson.D{}
 	result,err := ProductContext().Find(ctx,filter)
 	if err!=nil{
