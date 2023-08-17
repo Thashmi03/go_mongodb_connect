@@ -2,7 +2,6 @@ package config
 
 import (
 	"context"
-	"fmt"
 	"log"
 	"mongodb-dal/constants"
 	"time"
@@ -14,7 +13,9 @@ import (
 
 func ConnectDatabase()(*mongo.Client,error){
 	ctx,_:=context.WithTimeout(context.Background(),10*time.Second)
+	//it connects using the uri given
 	mongoConnection:=options.Client().ApplyURI(constants.ConnectionString)
+	//connect and checking whether connected 
 	mongoclient,err:=mongo.Connect(ctx,mongoConnection)
 	if err!=nil{
 		log.Fatal(err.Error())
@@ -27,11 +28,8 @@ func ConnectDatabase()(*mongo.Client,error){
 }
 
 func GetCollection(client *mongo.Client,dbname string,collectionName string)*mongo.Collection{
-	client,err:=ConnectDatabase()
-	if err!=nil{
-		fmt.Println(err)
-		panic(err)
-	}
+	// colletions contains the single collection which we use
+	
 	collection:=client.Database(dbname).Collection(collectionName)
 	return collection
 }

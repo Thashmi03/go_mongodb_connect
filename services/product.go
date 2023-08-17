@@ -35,7 +35,7 @@ import (
 // **********************************
 func ProductContext()*mongo.Collection{
 	client,_:=config.ConnectDatabase()
-	return config.GetCollection(client,"sample_restaurants","restaurants")
+	return config.GetCollection(client,"inventory","product")
 
 }
 func InsertProduct(product models.Product){

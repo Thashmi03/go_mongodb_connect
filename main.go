@@ -11,13 +11,7 @@ import (
 	"go.mongodb.org/mongo-driver/mongo"
 )
 
-// "context"
-// "fmt"
-// "mongodb-dal/constants"
 
-// "go.mongodb.org/mongo-driver/mongo"
-// "go.mongodb.org/mongo-driver/mongo/options"
-// "go.mongodb.org/mongo-driver/mongo/readpref"
 var(
 	mongoclient *mongo.Client
 )
@@ -25,7 +19,7 @@ func main(){
 	// client,_:=config.ConnectDatabase()
 	// config.GetCollection(client,"sample training")
 	
-	fmt.Println("MongoDB successfully connected...")
+	
 	// inserting one product
 	// product:=models.Product{ID: primitive.NewObjectID(),Name: "OnePlus",Price: 14000,Description: "Good"}
 	
@@ -39,9 +33,10 @@ func main(){
 	// services.FindProducts()
 
 
-	pro,_:=services.FindRes()
-	for i,p:=range pro{
-		fmt.Println(i+1,"Name:",p.Name,"-Cuisine",p.Cuisine)
+	fmt.Println("MongoDB successfully connected...")
+	pro,_:=services.FindTransactions()
+	for _,p:=range pro{
+		fmt.Println(p )
 	}
 	
 	
