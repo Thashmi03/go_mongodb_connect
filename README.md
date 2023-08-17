@@ -37,6 +37,7 @@
   this method will return mmongo collection
 
 
+
 ## operators
 
 1. $unwind-used to split the array documents or array fields into separate documents for each limit in the array.
@@ -54,5 +55,32 @@ eg-db.Books.aggregate([{
         localField:"author_id",
         foreignField:"_id",
         as:"AuthorDetail"
+    }
+}])
+## Update query
+# query
+***************
+## a>7000,tc==100
+db.getCollection("transactions").find({"$and":[
+    {"transaction_count":{"$eq":100}},
+    {"account_id":{"$lte":700000}}
+    ]})
+
+## sum
+db.getCollection("transactions").aggregate([{
+    $group:{
+        _id:null,
+        sum:{
+            $sum:"$transaction_count"
+        }
+    }
+}])
+## sum of all transacations(amounts)
+
+db.getCollection("transactions").aggregate([{
+    $project:{
+        sum:{
+            $sum:"$transactions.amount"
+        }
     }
 }])
